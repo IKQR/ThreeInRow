@@ -43,13 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ThreeInRow\Control.cs" />
     <Compile Include="ThreeInRow\Element\Candy.cs" />
     <Compile Include="ThreeInRow\Element\Draw.cs" />
     <Compile Include="ThreeInRow\Game.cs" />
-    <Compile Include="ThreeInRow\Helpers\Print.cs" />
     <Compile Include="ThreeInRow\Level.cs" />
-    <Compile Include="ThreeInRow\Helpers\Position.cs" />
-    <Compile Include="ThreeInRow\Helpers\Size.cs" />
+    <Compile Include="ThreeInRow\Helpers.cs" />
     <Compile Include="ThreeInRow\Element\Table.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,5 +56,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

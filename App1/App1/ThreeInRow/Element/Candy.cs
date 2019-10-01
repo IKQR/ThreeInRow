@@ -15,7 +15,8 @@ namespace Element
             Triangle = '\u25B2',
             Сircle = '\u25CF',
             Hearth = '\u2665',
-            Fance = '\u2588'
+            Fance = '\u2588',
+            Empty = '\u0000'
         };
         public enum Colors
         {
@@ -31,14 +32,6 @@ namespace Element
         Colors Color { get; set; }
         public Position Position { get; set; }
         public bool IsActive = false;
-        /*
-        public Candy(Position position, Colors color)
-        {
-            Position = position;
-            Color = color;
-            Type = Types.Square;
-        }
-        */
         public Candy(Position position, Colors color, Types type = Types.Square)
         {
             Position = position;
@@ -52,6 +45,10 @@ namespace Element
         public ConsoleColor getColor()
         {
             return (ConsoleColor)Color;
+        }
+        public void setColor(Colors color)
+        {
+            Color = color;
         }
     }
 }

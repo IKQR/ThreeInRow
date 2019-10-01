@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Helpers;
 using Element;
+using Control;
 
 namespace ThreeInRow
 {
@@ -23,9 +24,11 @@ namespace ThreeInRow
         public void Start()
         {
             isPlay = true;
-                while(true) { Draw(); 
-                System.Threading.Thread.Sleep(1000);
-                levelUp(2);
+            Draw();
+            LevelControl levelControl = new LevelControl(table);
+            while (isPlay)
+            {
+                levelControl.Do();
             }
         }
         public bool levelUp(Int32 step = 1)
@@ -55,9 +58,9 @@ namespace ThreeInRow
         protected void Draw()
         {
             Console.Clear();
+            Element.Draw.DrawFance(table.Size.Width + 2, table.Size.Height + 2);
             table.draw(new Position(1, 1));
-            Element.Draw.DrawFance(table.Size.Width+2, table.Size.Height+2);
-            
+            Console.SetCursorPosition(1,1);
         }
     }
 }

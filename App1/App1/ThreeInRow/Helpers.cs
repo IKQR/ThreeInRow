@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Helpers
 {
-    static class Print
+    public enum Direction
+    {
+        Right,
+        Left,
+        Up,
+        Down
+    }
+    public class Position
+    {
+        public Int32 X;
+        public Int32 Y;
+        public Position(Int32 x, Int32 y)
+        {
+            Y = y;
+            X = x;
+        }
+    }
+    public static class Print
     {
         static public void write(string str, Int32 pouse = 0)
         {
@@ -26,5 +43,21 @@ namespace Helpers
             Console.WriteLine();
         }
 
+    }
+    public class Size
+    {
+        public Int32 Height { get; set; }
+        public Int32 Width { get; set; }
+
+        public Size(Int32 width, Int32 height)
+        {
+            Width = width;
+            Height = height;
+        }
+        public Size(Int32 size)
+        {
+            Height = size;
+            Width = size;
+        }
     }
 }

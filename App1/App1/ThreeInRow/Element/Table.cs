@@ -11,7 +11,7 @@ namespace Element
     {
         public Candy[,] table { get; set; }
         public Size Size { get; set; }
-        Position startPosition { get; set; }
+        Position startPosition = new Position(0, 0);
         public Table(Size size)
         {
             Size = size;
@@ -28,7 +28,6 @@ namespace Element
                 }
             }
         }
-
         public void draw(Position start)
         {
             startPosition = start;
@@ -51,15 +50,15 @@ namespace Element
         }
         public void draw()
         {
-            startPosition = new Position(0,0);
+            Position CursorPosition = new Position(Console.CursorLeft, Console.CursorTop);
             for (Int32 i = 0; i < Size.Height; i++)
             {
                 for (Int32 j = 0; j < Size.Width; j++)
                 {
-                    table[i, j].Position = new Position(
+                    /*table[i, j].Position = new Position(
                         startPosition.X + table[i, j].Position.X,
                         startPosition.Y + table[i, j].Position.Y
-                        );
+                        );*/
                     Console.SetCursorPosition(
                         table[i, j].Position.X,
                         table[i, j].Position.Y);
@@ -68,6 +67,7 @@ namespace Element
                     Console.ResetColor();
                 }
             }
+            Console.SetCursorPosition(CursorPosition.X, CursorPosition.Y);
         }
     }
 }
