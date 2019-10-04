@@ -18,7 +18,7 @@ namespace Element
         public static char cornerDR = '\u259F';
         public static char cornerDL = '\u2599';
 
-        public static char block = '\u2588';
+        public static char block = '\u2588'; 
 
         public static void DrawFance(Int32 Width, Int32 Height)
         {

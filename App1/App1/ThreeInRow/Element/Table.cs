@@ -19,46 +19,29 @@ namespace Element
         }
         public void fill()
         {
+            Candy.Types t = Candy.Types.Hearth;
             table = new Candy[Size.Height, Size.Width];
             for (Int32 i = 0; i < Size.Height; i++)
             {
                 for (Int32 j = 0; j < Size.Width; j++)
                 {
-                    table[i, j] = new Candy(new Position(i, j), Candy.Colors.Red, Candy.Types.Hearth);
+                    if (i == 2) t = Candy.Types.Triangle;
+                    table[i, j] = new Candy(new Position(i, j), Candy.Colors.Red, t);
                 }
             }
         }
         public void draw(Position start)
         {
+            Position CursorPosition = new Position(Console.CursorLeft, Console.CursorTop);
             startPosition = start;
             for (Int32 i = 0; i < Size.Height; i++)
             {
                 for (Int32 j = 0; j < Size.Width; j++)
                 {
                     table[i, j].Position = new Position(
-                        startPosition.X + j,
-                        startPosition.Y + i
+                        startPosition.X + i,
+                        startPosition.Y + j
                         );
-                    Console.SetCursorPosition(
-                        table[i, j].Position.X,
-                        table[i, j].Position.Y);
-                    Console.ForegroundColor = (ConsoleColor)table[i, j].getColor();
-                    Console.Write(table[i, j].getType());
-                    Console.ResetColor();
-                }
-            }
-        }
-        public void draw()
-        {
-            Position CursorPosition = new Position(Console.CursorLeft, Console.CursorTop);
-            for (Int32 i = 0; i < Size.Height; i++)
-            {
-                for (Int32 j = 0; j < Size.Width; j++)
-                {
-                    /*table[i, j].Position = new Position(
-                        startPosition.X + table[i, j].Position.X,
-                        startPosition.Y + table[i, j].Position.Y
-                        );*/
                     Console.SetCursorPosition(
                         table[i, j].Position.X,
                         table[i, j].Position.Y);
@@ -69,5 +52,13 @@ namespace Element
             }
             Console.SetCursorPosition(CursorPosition.X, CursorPosition.Y);
         }
+        public void draw()
+        {
+            draw(startPosition);
+        }
+/*        public Candy getCandy(Position pos)
+        {
+            return ;
+        }*/
     }
 }

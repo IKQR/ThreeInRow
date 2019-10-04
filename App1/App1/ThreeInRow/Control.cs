@@ -16,13 +16,12 @@ namespace Control
         public const System.ConsoleKey Up = System.ConsoleKey.UpArrow;
         public const System.ConsoleKey Down = System.ConsoleKey.DownArrow;
         public const System.ConsoleKey Enter = System.ConsoleKey.Enter;
+        public const System.ConsoleKey Non = System.ConsoleKey.Delete;
     }
     public static class CursorControl
     {
         public static ConsoleKey getKey()
         {
-            no:
-
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
             {
@@ -33,7 +32,8 @@ namespace Control
                 case Keys.Enter: goto yes;
                 default: goto no;
             }
-            yes: return key;
+        yes: return key;
+        no: return Keys.Non;
         }
         public static void CursorGo(Direction Dir, Position min, Position max, Position CursorPosition)
         {
@@ -87,6 +87,7 @@ namespace Control
         Table level { get; set; }
         Position StartPosition { get; set; }
         Position LastPosition { get; set; }
+        Position candyPosition { get; set; }
         public LevelControl(Table lvl)
         {
             level = lvl;
@@ -112,12 +113,31 @@ namespace Control
                     break;
                 case Keys.Enter:
                     {
-                        level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y].setColor(Candy.Colors.Active);
+                        Candy candy = level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y];
+                        level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y].ChangeAct();
+                        
+                        if (Candy.getCountAct() == 1) candyPosition = level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y].Position;
+                        if (Candy.getCountAct() == 2)
+                        {
+                            Candy temp = level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y];
+                            level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y].setType(
+                                level.table[candyPosition.X - StartPosition.X, candyPosition.Y - StartPosition.Y].Type
+                                );
+                            level.table[CursorPosition.X - StartPosition.X, CursorPosition.Y - StartPosition.Y].ChangeAct();
+                            level.table[candyPosition.X - StartPosition.X, candyPosition.Y - StartPosition.Y].setType(temp.Type);
+                            Candy.nullCountAct();
+                            level.table[candyPosition.X - StartPosition.X, candyPosition.Y - StartPosition.Y].ChangeAct();
+                        }
                         Console.SetCursorPosition(CursorPosition.X, CursorPosition.Y);
                     }
                     break;
+                default: Console.SetCursorPosition(CursorPosition.X, CursorPosition.Y); break;
             }
             level.draw();
+        }
+        protected void Exchange(Candy candy)
+        {
+            
         }
         public void Do()
         {
