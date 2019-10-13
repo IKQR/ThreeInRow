@@ -22,7 +22,7 @@ namespace Control
     {
         public static ConsoleKey getKey()
         {
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(false).Key;
             switch (key)
             {
                 case Keys.Right: goto yes;

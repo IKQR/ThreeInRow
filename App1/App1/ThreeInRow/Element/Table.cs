@@ -56,7 +56,7 @@ namespace Element
         {
             draw(startPosition);
         }
-/*        public Candy getCandy(Position pos)
+        /*public Candy getCandy(Position pos)
         {
             return ;
         }*/
