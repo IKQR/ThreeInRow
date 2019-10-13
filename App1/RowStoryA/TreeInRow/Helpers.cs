@@ -29,7 +29,7 @@ namespace TreeInRow
 
         Square = '\u25A0',
         Triangle = '\u25B2',
-        Сircle = '\u25CF',
+        Сircle = '\u263B',
         Hearth = '\u2665',
 
         Empty = '\u0000'
@@ -114,7 +114,7 @@ namespace TreeInRow
         }
         public Symbols RSymbol()
         {
-            switch ((int)Next(1, 4))
+            switch ((int)Next(1, 5))
             {
                 case 1: return Symbols.Square;
                 case 2: return Symbols.Triangle;

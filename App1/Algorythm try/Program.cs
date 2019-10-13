@@ -34,10 +34,9 @@ namespace Algorythm_try
         {
             Console.OutputEncoding = Encoding.UTF8;
             Random rnd = new Random();
-            Level lvl = new Level(new Size(15), new Point(1,1));
-            lvl.Candys[0, 1].View = Symbols.Empty;
-            for(int i = 0; i< lvl.Size.Height+20; i++)
-                lvl.Candys[rnd.Next(0, lvl.Size.Height-1), rnd.Next(0, lvl.Size.Height-1)].View = Symbols.Empty;
+            Level lvl = new Level(new Size(4), new Point(1,1));
+            for(int i = 0; i< lvl.Size.Height; i++)
+                lvl.Candys[0, i].View = Symbols.Empty;
             lvl.DrawCandys();
             down(lvl);
             lvl.DrawCandys();

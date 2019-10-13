@@ -47,27 +47,40 @@ namespace TreeInRow
                 startPosition.X,
                 startPosition.Y
                 );
-            Fill();
+            Fill(true);
         }
-        private void Fill()
+        private void Fill(bool all)
         {
             Rnd rand = new Rnd();
+            Symbols s = new Symbols();
+            Colors c = new Colors();
             Candys = new Candy[Size.Width, Size.Height];
             for(int i = 0; i < Size.Width; i++)
             {
                 for(int j = 0; j < Size.Height; j++)
+                if(Candys[i,j].View == Symbols.Empty || all)
                 {
+                    s = rand.RSymbol();
+                    switch(s)
+                    {
+                        case Symbols.Square: c = Colors.Blue; break;
+                        case Symbols.Triangle: c = Colors.Yellow; break;
+                        case Symbols.Hearth: c = Colors.Red; break;
+                        case Symbols.Сircle: c = Colors.Green; break;
+                    }
                     Candys[i, j] = new Candy(
                         new Point(
                             StartPosition.X + i,
                             StartPosition.Y + j
                             ),
-                        rand.RColor(),
-                        rand.RSymbol()
+                        c,
+                        s
                         );
                 }
             }
         }
+
+        /* отрисовка элементов игры */
         public void DrawCandys()
         {
             DrawCandys(StartPosition.Y,StartPosition.Y+Size.Height);
@@ -150,6 +163,7 @@ namespace TreeInRow
                 );
             //System.Threading.Thread.Sleep(100);
         }
+        /* Работа с элементами во время нажатия Enter */
         public void Activate(Point pos)
         {
             int x = pos.X - StartPosition.X;
@@ -195,17 +209,37 @@ namespace TreeInRow
             two.Y - StartPosition.Y].Draw();
             
         }
-        public void Check(Point pos) 
+        public void Down()
+        {
+            bool flag = true;
+            while (flag)
+            {
+                flag = false;
+                for (int x = 0; x < this.Size.Width; x++)
+                {
+                    for (int y = 0; y < this.Size.Height - 1; y++)
+                    {
+                        if (this.Candys[x, y + 1].View == Symbols.Empty && this.Candys[x, y].View != Symbols.Empty)
+                        {
+                            Console.SetCursorPosition(this.Candys[x, y + 1].Position.X, this.Candys[x, y + 1].Position.Y);
+                            this.Exchange(this.Candys[x, y + 1].Position, this.Candys[x, y].Position, true, true);
+                            flag = true;
+                            System.Threading.Thread.Sleep(10);
+                        }
+                    }
+                }
+            }
+        }
+        public void Check(Point pos)
         {
             Cursor cursor = new Cursor(Candys[0,0].Position, Size);
             Activate(pos);
             cursor.Move(this, pos);
+
         }
-        public bool isNear(Point one, Point two)
-        {
-            if (Math.Abs(one.X - two.X) == 1 && Math.Abs(one.Y - two.Y) == 1)
-                return true;
-            return false;
-        }
+    }
+    public static class Algorithm
+    {
+
     }
 }

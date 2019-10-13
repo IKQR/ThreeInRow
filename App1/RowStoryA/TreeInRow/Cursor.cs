@@ -80,7 +80,7 @@ namespace TreeInRow
                 case ConsoleKey.LeftArrow: Go(Direction.Left, cursorPosition); break;
                 case ConsoleKey.Enter:
                     Console.SetCursorPosition(cursorPosition.X, cursorPosition.Y);
-                    lvl.Check(cursorPosition); break;
+                    lvl.Check(cursorPosition); goto enter;
                 case ConsoleKey.Tab:
                     Console.SetCursorPosition(cursorPosition.X, cursorPosition.Y);
                     lvl.DrawCandys();
@@ -93,8 +93,8 @@ namespace TreeInRow
                 cursorPosition.X - lvl.StartPosition.X,
                 cursorPosition.Y - lvl.StartPosition.Y
                 ].Draw();
+        enter:
             return true;
-            //lvl.DrawCandys();
         }
         public void Move(Level lvl, Point main)
         {
