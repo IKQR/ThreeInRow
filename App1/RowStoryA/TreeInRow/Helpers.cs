@@ -75,7 +75,7 @@ namespace TreeInRow
         }
     }
 
-    public static class Print
+    public static class Print 
     {
         public static void write(char str, Int32 pouse = 0)
         {

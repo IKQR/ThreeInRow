@@ -98,43 +98,32 @@ namespace TreeInRow
         }
         public void Move(Level lvl, Point main)
         {
-            onemore:
+        onemore:
             Point cursorPosition = new Point(
                 Console.CursorLeft,
                 Console.CursorTop
                 );
+            Point next = main;
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.UpArrow:
-                    if(main.Y > min.Y)
-                        lvl.Exchange(
-                            main, 
-                            new Point(main.X, main.Y - 1),
-                            true);
+                    if (main.Y > min.Y)
+                        next = new Point(main.X, main.Y - 1);
                     else goto default;
                     break;
                 case ConsoleKey.DownArrow:
-                    if(main.Y < max.Y)
-                        lvl.Exchange(
-                            main, 
-                            new Point(main.X, main.Y + 1),
-                            true);
+                    if (main.Y < max.Y)
+                        next = new Point(main.X, main.Y + 1);
                     else goto default;
                     break;
                 case ConsoleKey.RightArrow:
-                    if(main.X < max.X)
-                        lvl.Exchange(
-                            main, 
-                            new Point(main.X + 1, main.Y),
-                            true);
+                    if (main.X < max.X)
+                           next = new Point(main.X + 1, main.Y);
                     else goto default;
                     break;
                 case ConsoleKey.LeftArrow:
-                    if(main.X > min.X)
-                        lvl.Exchange(
-                            main, 
-                            new Point(main.X - 1, main.Y),
-                            true);
+                    if (main.X > min.X)
+                            next = new Point(main.X - 1, main.Y);
                     else goto default;
                     break;
                 case ConsoleKey.Tab:
@@ -152,15 +141,20 @@ namespace TreeInRow
                     lvl.Candys[
                 cursorPosition.X - lvl.StartPosition.X,
                 cursorPosition.Y - lvl.StartPosition.Y
-                ].Draw();
+                ].Draw(); 
                 Console.SetCursorPosition(
                 cursorPosition.X,
                 cursorPosition.Y
                 );
                     goto onemore;
             }
-            
-            Console.SetCursorPosition(
+            lvl.Exchange(main, next);
+            if (!lvl.LookForRows())
+            {
+                lvl.Exchange(main, next);
+                lvl.DisActivate(main);
+            }
+                Console.SetCursorPosition(
                 cursorPosition.X,
                 cursorPosition.Y
                 );

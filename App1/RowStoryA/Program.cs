@@ -11,7 +11,7 @@ namespace RowStoryA
     {
         static void Main(string[] args)
         {
-            Game game = new Game(5);
+            Game game = new Game();
             game.Start();
         }
     }

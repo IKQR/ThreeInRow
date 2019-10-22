@@ -50,6 +50,7 @@
     <Compile Include="TreeInRow\Game.cs" />
     <Compile Include="TreeInRow\Helpers.cs" />
     <Compile Include="TreeInRow\Level.cs" />
+    <Compile Include="TreeInRow\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

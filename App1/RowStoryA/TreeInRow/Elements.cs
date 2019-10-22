@@ -69,6 +69,26 @@ namespace TreeInRow
                 cursorPosition.Y
                 );
         }
+        public void Draw(int pouse)
+        {
+            Point cursorPosition = new Point(
+                Console.CursorLeft,
+                Console.CursorTop
+                );
+
+            Console.SetCursorPosition(
+                Position.X,
+                Position.Y
+                );
+            if (!IsActive) Console.ForegroundColor = (ConsoleColor)Color;
+            else Console.ForegroundColor = (ConsoleColor)Colors.Active;
+            Print.write((char)View, pouse);
+            Console.ResetColor();
+            Console.SetCursorPosition(
+                cursorPosition.X,
+                cursorPosition.Y
+                );
+        }
         public void ChangeAct()
         {
             isActive = !isActive;
