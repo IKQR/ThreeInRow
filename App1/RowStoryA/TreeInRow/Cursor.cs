@@ -87,6 +87,9 @@ namespace TreeInRow
                     lvl.DrawFance();
                     break;
                 case ConsoleKey.Escape: return false;
+                case ConsoleKey.Spacebar: 
+                    lvl.Pause(); 
+                    break;
                 default: Console.SetCursorPosition(cursorPosition.X, cursorPosition.Y); break;
             }
             lvl.Candys[
@@ -136,6 +139,9 @@ namespace TreeInRow
                         main.X - lvl.StartPosition.X,
                         main.Y - lvl.StartPosition.Y
                         ].ChangeAct();
+                    break;
+                case ConsoleKey.Spacebar: 
+                    lvl.Pause(); 
                     break;
                 default:
                     lvl.Candys[

@@ -54,7 +54,7 @@ namespace TreeInRow
         }
         public void Start()
         {
-            if (!gamePlay) goto played;
+            if (!gamePlay || lvl.Size.Width == 0) goto played;
             lvl.DrawFance();
             lvl.DrawCandys();
             player.PrintInfo();
@@ -63,7 +63,7 @@ namespace TreeInRow
                 lvl.StartPosition.X,
                 lvl.StartPosition.Y
                 );
-            while (cursor.Live(lvl));
+            while (cursor.Live(lvl) && Int64.Parse(player.GetScore()) < 5000);
             played: GoodBye();
         }
         protected void GoodBye()
@@ -71,12 +71,14 @@ namespace TreeInRow
             Console.Clear();
             if(gamePlay)
             {
-                Print.write(player.Name, 25);
-                Print.writeLn(", you score is "+ player.GetScore(), 200);
+                Print.write(player.Name, 50);
+                if(Int64.Parse(player.GetScore()) < 5000)
+                    Print.writeLn(", you score is "+ player.GetScore(), 200);
+                else Print.writeLn(",GOOD JOB! YOU WON THIS GAME" , 200);
                 Print.writeLn("Thank you for playing!", 200);
             }
-            Print.writeLn("Goodbye!!!", 200);
-            Print.write("", 1000);
+            Print.writeLn("Goodbye.......", 200);
+            //Print.write("", 1000);
         }
     }
 }

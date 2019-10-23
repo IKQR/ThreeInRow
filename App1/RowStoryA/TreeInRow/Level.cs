@@ -335,7 +335,7 @@ namespace TreeInRow
             
             Candy[,] temp = (Candy[,])Candys.Clone();
             Cursor cursor = new Cursor(Candys[0,0].Position, Size);
-            Activate(pos);
+            //Activate(pos);
             cursor.Move(this, pos);
             DrawCandys();
         }
@@ -502,6 +502,18 @@ namespace TreeInRow
             }
             //DrawCandys();
             //Console.ReadKey();
+        }
+        /* Остальное */
+        public void Pause()
+        {
+            player.HowToPlay();
+            DrawCandys();
+            DrawFance();
+            player.PrintInfo();
+            Console.SetCursorPosition(
+                StartPosition.X,
+                StartPosition.Y
+                );
         }
     }
 }
