@@ -13,7 +13,7 @@ namespace TreeInRow
         protected bool gamePlay { get; set; }
         public Game()
         {
-            Console.OutputEncoding = Encoding.UTF8;
+            SetConfig();
             int printPouse = 10;
             Print.writeLn("Hello, Player! What is your name?", printPouse);
             string playerName = Console.ReadLine();
@@ -66,6 +66,14 @@ namespace TreeInRow
             while (cursor.Live(lvl) && Int64.Parse(player.GetScore()) < 5000);
             played: GoodBye();
         }
+
+        protected void SetConfig()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WindowHeight = 10;
+            Console.WindowWidth = 110;
+            //Console.
+        }
         protected void GoodBye()
         {
             Console.Clear();
@@ -73,11 +81,11 @@ namespace TreeInRow
             {
                 Print.write(player.Name, 50);
                 if(Int64.Parse(player.GetScore()) < 5000)
-                    Print.writeLn(", you score is "+ player.GetScore(), 200);
-                else Print.writeLn(",GOOD JOB! YOU WON THIS GAME" , 200);
-                Print.writeLn("Thank you for playing!", 200);
+                    Print.writeLn(", you score is "+ player.GetScore(), 100);
+                else Print.writeLn(",GOOD JOB! YOU WON THIS GAME" , 100);
+                Print.writeLn("Thank you for playing!", 100);
             }
-            Print.writeLn("Goodbye.......", 200);
+            Print.writeLn("Goodbye.......", 100);
             //Print.write("", 1000);
         }
     }

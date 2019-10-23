@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace TreeInRow
 {
     public class Cursor
     {
+        protected static int oneCount = 0;
+        protected ConsoleKey LastInput = ConsoleKey.Enter;
         protected Point max { get; set; }
         protected Point min { get; set; }
 
@@ -67,11 +71,17 @@ namespace TreeInRow
         }
         public bool Live(Level lvl)
         {
+            if (oneCount > 20)
+                lvl.DeBug(LastInput);
             Point cursorPosition = new Point(
                 Console.CursorLeft,
                 Console.CursorTop
                 );
             ConsoleKey key = Console.ReadKey().Key;
+            if (key == LastInput) oneCount++;
+            else { oneCount = 0;
+                LastInput = key;
+            }
             switch (key)
             {
                 case ConsoleKey.UpArrow: Go(Direction.Up, cursorPosition); break;

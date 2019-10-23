@@ -186,6 +186,7 @@ namespace TreeInRow
         }
         public void DrawCandys(int start, int finish)
         {
+            Console.CursorVisible = false;
             Point CurorPosition = new Point(
                 Console.CursorLeft,
                 Console.CursorTop
@@ -211,6 +212,7 @@ namespace TreeInRow
                 CurorPosition.X,
                 CurorPosition.Y
                 );
+            Console.CursorVisible = true;
         }
         public void DrawFance()
         {
@@ -342,6 +344,7 @@ namespace TreeInRow
         /* Проверка и удаление подходящих элементов массива*/
         public bool LookForRows()
         {
+            Console.CursorVisible = false;
             bool flag = false;
         onceMore:
             for (var y = 0; y < Size.Height; y++)
@@ -422,6 +425,7 @@ namespace TreeInRow
             }
             //DrawCandys();
             //Console.ReadKey();
+            Console.CursorVisible = true;
             return flag;
         }
         protected void DeleteRightRows()
@@ -514,6 +518,20 @@ namespace TreeInRow
                 StartPosition.X,
                 StartPosition.Y
                 );
+        }
+        public void DeBug(ConsoleKey k)
+        {
+            ConsoleKey k1;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("I think your key is stuck.");
+                Console.WriteLine("Please press another button");
+                k1 = Console.ReadKey().Key;
+            } while (k1 == k);
+            
+            Pause();
+
         }
     }
 }
